@@ -6,7 +6,7 @@
 2. Do all function in handler (Create ✅, Reads ✅, Update ✅, Delete ✅, ReadByID ✅)
 3. Sesuain response dengan schema
 4. Error handler di Findbyid dan delete pada resultnya
-5. Gunakan environment
+5. Use environment ✅
 
 ## Flow App
 
@@ -26,6 +26,10 @@ or
 - `swag init -g server.go`
 - `go build server.go`
 - `./server`
+
+visit
+
+- `http://127.0.0.1:5000/swagger/index.html` to see Doc API
 
 ### Tutorial from
 
