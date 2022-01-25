@@ -1,0 +1,185 @@
+definitions:
+  schemas.APIResponse400:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    type: object
+  schemas.APIResponse404:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    type: object
+  schemas.APIResponseID:
+    properties:
+      code:
+        type: integer
+      id:
+        type: integer
+      message:
+        type: string
+    type: object
+  schemas.BookRequest:
+    properties:
+      description:
+        type: string
+      price:
+        type: integer
+      rating:
+        type: integer
+      title:
+        type: string
+    required:
+    - price
+    - title
+    type: object
+info:
+  contact: {}
+paths:
+  /books:
+    get:
+      consumes:
+      - application/json
+      description: Get all books
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/schemas.APIResponseID'
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/schemas.APIResponse400'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/schemas.APIResponse404'
+      summary: Get all books
+      tags:
+      - Books
+    post:
+      consumes:
+      - application/json
+      description: Post a book
+      parameters:
+      - description: Body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.BookRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/schemas.BookRequest'
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/schemas.APIResponse400'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/schemas.APIResponse404'
+      summary: Post a book
+      tags:
+      - Books
+  /books/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete book by ID
+      parameters:
+      - description: Id
+        in: path
+        name: ID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/schemas.BookRequest'
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/schemas.APIResponse400'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/schemas.APIResponse404'
+      summary: Delete book by ID
+      tags:
+      - Books
+    get:
+      consumes:
+      - application/json
+      description: Find book by ID
+      parameters:
+      - description: Id
+        in: path
+        name: ID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/schemas.BookRequest'
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/schemas.APIResponse400'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/schemas.APIResponse404'
+      summary: Find book by ID
+      tags:
+      - Books
+    put:
+      consumes:
+      - application/json
+      description: Update the book by ID
+      parameters:
+      - description: Id
+        in: path
+        name: ID
+        required: true
+        type: integer
+      - description: Body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.BookRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/schemas.BookRequest'
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/schemas.APIResponse400'
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/schemas.APIResponse404'
+      summary: Update the book by ID
+      tags:
+      - Books
+swagger: "2.0"
