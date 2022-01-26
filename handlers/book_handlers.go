@@ -116,8 +116,8 @@ func (h *bookHandler) DeleteBookHandler(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"status": 200,
-		"msg":    "success",
+		"code": 200,
+		"msg":  "success",
 	})
 }
 
@@ -138,14 +138,16 @@ func (h *bookHandler) FindByIDBookHandler(c *gin.Context) {
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"err": err,
+			"error": err,
+			"msg":   "bad request",
+			"code":  400,
 		})
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"status": 200,
-		"msg":    "success",
-		"data":   result,
+		"code": 200,
+		"msg":  "success",
+		"data": result,
 	})
 }
 
