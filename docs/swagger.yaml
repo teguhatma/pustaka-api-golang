@@ -144,9 +144,9 @@ paths:
       - application/json
       description: Delete book by ID
       parameters:
-      - description: Id
+      - description: id
         in: path
-        name: ID
+        name: id
         required: true
         type: integer
       produces:
@@ -172,9 +172,9 @@ paths:
       - application/json
       description: Find book by ID
       parameters:
-      - description: Id
+      - description: id
         in: path
-        name: ID
+        name: id
         required: true
         type: integer
       produces:
@@ -200,9 +200,9 @@ paths:
       - application/json
       description: Update the book by ID
       parameters:
-      - description: Id
+      - description: id
         in: path
-        name: ID
+        name: id
         required: true
         type: integer
       - description: Body

@@ -99,8 +99,8 @@
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "Id",
-                        "name": "ID",
+                        "description": "id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -141,8 +141,8 @@
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "Id",
-                        "name": "ID",
+                        "description": "id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     },
@@ -192,8 +192,8 @@
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "Id",
-                        "name": "ID",
+                        "description": "id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }

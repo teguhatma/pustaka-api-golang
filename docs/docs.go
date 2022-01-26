@@ -118,8 +118,8 @@ var doc = `{
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "Id",
-                        "name": "ID",
+                        "description": "id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -160,8 +160,8 @@ var doc = `{
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "Id",
-                        "name": "ID",
+                        "description": "id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     },
@@ -211,8 +211,8 @@ var doc = `{
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "Id",
-                        "name": "ID",
+                        "description": "id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }

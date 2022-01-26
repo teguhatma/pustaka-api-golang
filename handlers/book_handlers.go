@@ -97,7 +97,7 @@ func (h *bookHandler) PostBookHandler(c *gin.Context) {
 // @Description Delete book by ID
 // @Accept	json
 // @Produce json
-// @Param ID path int true "Id"
+// @Param id path int true "id"
 // @Success 200 {object} bookSchema.APIResponse200 "Success"
 // @Failure 400 {object} bookSchema.APIResponse400 "Bad Request"
 // @Failure 404 {object} bookSchema.APIResponse404 "Not Found"
@@ -126,7 +126,7 @@ func (h *bookHandler) DeleteBookHandler(c *gin.Context) {
 // @Description Find book by ID
 // @Accept	json
 // @Produce json
-// @Param ID path int true "Id"
+// @Param id path int true "id"
 // @Success 200 {object} bookSchema.APIResponseBook "Success"
 // @Failure 400 {object} bookSchema.APIResponse400 "Bad Request"
 // @Failure 404 {object} bookSchema.APIResponse404 "Not Found"
@@ -154,7 +154,7 @@ func (h *bookHandler) FindByIDBookHandler(c *gin.Context) {
 // @Description Update the book by ID
 // @Accept	json
 // @Produce json
-// @Param ID path int true "Id"
+// @Param id path int true "id"
 // @Param body body bookSchema.BookRequest true "Body"
 // @Success 200 {object} bookSchema.APIResponseBook "Success"
 // @Failure 400 {object} bookSchema.APIResponse400 "Bad Request"
