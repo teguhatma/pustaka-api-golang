@@ -40,17 +40,17 @@ var doc = `{
                     "200": {
                         "description": "Success",
                         "schema": {
-                            "$ref": "#/definitions/schemas.APIResponseID"
+                            "$ref": "#/definitions/schemas.APIResponseBooks"
                         }
                     },
                     "400": {
-                        "description": "We need ID!!",
+                        "description": "Bad Request",
                         "schema": {
                             "$ref": "#/definitions/schemas.APIResponse400"
                         }
                     },
                     "404": {
-                        "description": "Can not find ID",
+                        "description": "Not Found",
                         "schema": {
                             "$ref": "#/definitions/schemas.APIResponse404"
                         }
@@ -84,17 +84,17 @@ var doc = `{
                     "200": {
                         "description": "Success",
                         "schema": {
-                            "$ref": "#/definitions/schemas.BookRequest"
+                            "$ref": "#/definitions/schemas.APIResponseBook"
                         }
                     },
                     "400": {
-                        "description": "We need ID!!",
+                        "description": "Bad Request",
                         "schema": {
                             "$ref": "#/definitions/schemas.APIResponse400"
                         }
                     },
                     "404": {
-                        "description": "Can not find ID",
+                        "description": "Not Found",
                         "schema": {
                             "$ref": "#/definitions/schemas.APIResponse404"
                         }
@@ -128,17 +128,17 @@ var doc = `{
                     "200": {
                         "description": "Success",
                         "schema": {
-                            "$ref": "#/definitions/schemas.BookRequest"
+                            "$ref": "#/definitions/schemas.APIResponseBook"
                         }
                     },
                     "400": {
-                        "description": "We need ID!!",
+                        "description": "Bad Request",
                         "schema": {
                             "$ref": "#/definitions/schemas.APIResponse400"
                         }
                     },
                     "404": {
-                        "description": "Can not find ID",
+                        "description": "Not Found",
                         "schema": {
                             "$ref": "#/definitions/schemas.APIResponse404"
                         }
@@ -179,17 +179,17 @@ var doc = `{
                     "200": {
                         "description": "Success",
                         "schema": {
-                            "$ref": "#/definitions/schemas.BookRequest"
+                            "$ref": "#/definitions/schemas.APIResponseBook"
                         }
                     },
                     "400": {
-                        "description": "We need ID!!",
+                        "description": "Bad Request",
                         "schema": {
                             "$ref": "#/definitions/schemas.APIResponse400"
                         }
                     },
                     "404": {
-                        "description": "Can not find ID",
+                        "description": "Not Found",
                         "schema": {
                             "$ref": "#/definitions/schemas.APIResponse404"
                         }
@@ -221,17 +221,17 @@ var doc = `{
                     "200": {
                         "description": "Success",
                         "schema": {
-                            "$ref": "#/definitions/schemas.BookRequest"
+                            "$ref": "#/definitions/schemas.APIResponse200"
                         }
                     },
                     "400": {
-                        "description": "We need ID!!",
+                        "description": "Bad Request",
                         "schema": {
                             "$ref": "#/definitions/schemas.APIResponse400"
                         }
                     },
                     "404": {
-                        "description": "Can not find ID",
+                        "description": "Not Found",
                         "schema": {
                             "$ref": "#/definitions/schemas.APIResponse404"
                         }
@@ -241,14 +241,32 @@ var doc = `{
         }
     },
     "definitions": {
+        "schemas.APIResponse200": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "message": {
+                    "type": "string",
+                    "example": "success"
+                }
+            }
+        },
         "schemas.APIResponse400": {
             "type": "object",
             "properties": {
                 "code": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 400
+                },
+                "error": {
+                    "type": "string"
                 },
                 "message": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "not found"
                 }
             }
         },
@@ -256,24 +274,50 @@ var doc = `{
             "type": "object",
             "properties": {
                 "code": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 404
+                },
+                "error": {
+                    "type": "string"
                 },
                 "message": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "bad request"
                 }
             }
         },
-        "schemas.APIResponseID": {
+        "schemas.APIResponseBook": {
             "type": "object",
             "properties": {
                 "code": {
-                    "type": "integer"
+                    "type": "integer",
+                    "example": 200
                 },
-                "id": {
-                    "type": "integer"
+                "data": {
+                    "$ref": "#/definitions/schemas.BookResponse"
                 },
                 "message": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "success"
+                }
+            }
+        },
+        "schemas.APIResponseBooks": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/schemas.BookResponse"
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "example": "success"
                 }
             }
         },
@@ -294,6 +338,29 @@ var doc = `{
                     "type": "integer"
                 },
                 "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "schemas.BookResponse": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "price": {
+                    "type": "integer"
+                },
+                "rating": {
+                    "type": "integer"
+                },
+                "updatedAt": {
                     "type": "string"
                 }
             }

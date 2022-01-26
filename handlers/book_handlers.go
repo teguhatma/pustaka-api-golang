@@ -25,17 +25,17 @@ func NewBookHandler(bookService services.BookService) *bookHandler {
 // @Description Get all books
 // @Accept	json
 // @Produce	json
-// @Success 200 {object} bookSchema.APIResponseID "Success"
-// @Failure 400 {object} bookSchema.APIResponse400 "We need ID!!"
-// @Failure 404 {object} bookSchema.APIResponse404 "Can not find ID"
+// @Success 200 {object} bookSchema.APIResponseBooks "Success"
+// @Failure 400 {object} bookSchema.APIResponse400 "Bad Request"
+// @Failure 404 {object} bookSchema.APIResponse404 "Not Found"
 // @Router /books [get]
 func (h *bookHandler) BooksHandler(c *gin.Context) {
 	result, err := h.bookService.FindAll()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"err":  err,
-			"code": 400,
-			"msg":  "bad request",
+			"error": err,
+			"code":  400,
+			"msg":   "bad request",
 		})
 	}
 
@@ -52,9 +52,9 @@ func (h *bookHandler) BooksHandler(c *gin.Context) {
 // @Accept	json
 // @Produce	json
 // @Param body body bookSchema.BookRequest true "Body"
-// @Success 200 {object} bookSchema.BookRequest "Success"
-// @Failure 400 {object} bookSchema.APIResponse400 "We need ID!!"
-// @Failure 404 {object} bookSchema.APIResponse404 "Can not find ID"
+// @Success 200 {object} bookSchema.APIResponseBook "Success"
+// @Failure 400 {object} bookSchema.APIResponse400 "Bad Request"
+// @Failure 404 {object} bookSchema.APIResponse404 "Not Found"
 // @Router /books [post]
 func (h *bookHandler) PostBookHandler(c *gin.Context) {
 	var bookRequest bookSchema.BookRequest
@@ -68,9 +68,9 @@ func (h *bookHandler) PostBookHandler(c *gin.Context) {
 			errorMessages = append(errorMessages, errorMessage)
 		}
 		c.JSON(http.StatusBadRequest, gin.H{
-			"errors": errorMessages,
-			"code":   400,
-			"msg":    "bad request",
+			"error": errorMessages,
+			"code":  400,
+			"msg":   "bad request",
 		})
 		return
 	}
@@ -98,9 +98,9 @@ func (h *bookHandler) PostBookHandler(c *gin.Context) {
 // @Accept	json
 // @Produce json
 // @Param ID path int true "Id"
-// @Success 200 {object} bookSchema.BookRequest "Success"
-// @Failure 400 {object} bookSchema.APIResponse400 "We need ID!!"
-// @Failure 404 {object} bookSchema.APIResponse404 "Can not find ID"
+// @Success 200 {object} bookSchema.APIResponse200 "Success"
+// @Failure 400 {object} bookSchema.APIResponse400 "Bad Request"
+// @Failure 404 {object} bookSchema.APIResponse404 "Not Found"
 // @Router /books/{id} [delete]
 func (h *bookHandler) DeleteBookHandler(c *gin.Context) {
 	id := c.Param("id")
@@ -109,7 +109,9 @@ func (h *bookHandler) DeleteBookHandler(c *gin.Context) {
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"err": err,
+			"error": err,
+			"code":  400,
+			"msg":   "bad request",
 		})
 	}
 
@@ -125,9 +127,9 @@ func (h *bookHandler) DeleteBookHandler(c *gin.Context) {
 // @Accept	json
 // @Produce json
 // @Param ID path int true "Id"
-// @Success 200 {object} bookSchema.BookRequest "Success"
-// @Failure 400 {object} bookSchema.APIResponse400 "We need ID!!"
-// @Failure 404 {object} bookSchema.APIResponse404 "Can not find ID"
+// @Success 200 {object} bookSchema.APIResponseBook "Success"
+// @Failure 400 {object} bookSchema.APIResponse400 "Bad Request"
+// @Failure 404 {object} bookSchema.APIResponse404 "Not Found"
 // @Router /books/{id} [get]
 func (h *bookHandler) FindByIDBookHandler(c *gin.Context) {
 	id := c.Param("id")
@@ -154,9 +156,9 @@ func (h *bookHandler) FindByIDBookHandler(c *gin.Context) {
 // @Produce json
 // @Param ID path int true "Id"
 // @Param body body bookSchema.BookRequest true "Body"
-// @Success 200 {object} bookSchema.BookRequest "Success"
-// @Failure 400 {object} bookSchema.APIResponse400 "We need ID!!"
-// @Failure 404 {object} bookSchema.APIResponse404 "Can not find ID"
+// @Success 200 {object} bookSchema.APIResponseBook "Success"
+// @Failure 400 {object} bookSchema.APIResponse400 "Bad Request"
+// @Failure 404 {object} bookSchema.APIResponse404 "Not Found"
 // @Router /books/{id} [put]
 func (h *bookHandler) UpdateBookHandler(c *gin.Context) {
 	id := c.Param("id")

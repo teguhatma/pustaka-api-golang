@@ -1,25 +1,17 @@
 package schemas
 
-type APIResponseID struct {
-	Code    int
-	Message string
-	ID      int
+import "time"
+
+type APIResponseBooks struct {
+	Code    int    `example:"200"`
+	Message string `example:"success"`
+	Data    []BookResponse
 }
 
-type APIResponse404 struct {
-	Code    int
-	Message string
-}
-
-type APIResponse400 struct {
-	Code    int
-	Message string
-}
-
-type APIResponseTitle struct {
-	Code    int
-	Message string
-	Title   string
+type APIResponseBook struct {
+	Code    int    `example:"200"`
+	Message string `example:"success"`
+	Data    BookResponse
 }
 
 type BookRequest struct {
@@ -27,4 +19,13 @@ type BookRequest struct {
 	Price       int    `json:"price" binding:"required,number"`
 	Description string `json:"description"`
 	Rating      int    `json:"rating"`
+}
+
+type BookResponse struct {
+	Id          int
+	Price       int
+	Description string
+	Rating      int
+	CreatedAt   time.Time
+	UpdatedAt   time.Time
 }

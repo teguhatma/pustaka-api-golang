@@ -1,25 +1,57 @@
 definitions:
+  schemas.APIResponse200:
+    properties:
+      code:
+        example: 200
+        type: integer
+      message:
+        example: success
+        type: string
+    type: object
   schemas.APIResponse400:
     properties:
       code:
+        example: 400
         type: integer
+      error:
+        type: string
       message:
+        example: not found
         type: string
     type: object
   schemas.APIResponse404:
     properties:
       code:
+        example: 404
         type: integer
+      error:
+        type: string
       message:
+        example: bad request
         type: string
     type: object
-  schemas.APIResponseID:
+  schemas.APIResponseBook:
     properties:
       code:
+        example: 200
         type: integer
-      id:
-        type: integer
+      data:
+        $ref: '#/definitions/schemas.BookResponse'
       message:
+        example: success
+        type: string
+    type: object
+  schemas.APIResponseBooks:
+    properties:
+      code:
+        example: 200
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/schemas.BookResponse'
+        type: array
+      message:
+        example: success
         type: string
     type: object
   schemas.BookRequest:
@@ -36,6 +68,21 @@ definitions:
     - price
     - title
     type: object
+  schemas.BookResponse:
+    properties:
+      createdAt:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      price:
+        type: integer
+      rating:
+        type: integer
+      updatedAt:
+        type: string
+    type: object
 info:
   contact: {}
 paths:
@@ -50,13 +97,13 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/schemas.APIResponseID'
+            $ref: '#/definitions/schemas.APIResponseBooks'
         "400":
-          description: We need ID!!
+          description: Bad Request
           schema:
             $ref: '#/definitions/schemas.APIResponse400'
         "404":
-          description: Can not find ID
+          description: Not Found
           schema:
             $ref: '#/definitions/schemas.APIResponse404'
       summary: Get all books
@@ -79,13 +126,13 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/schemas.BookRequest'
+            $ref: '#/definitions/schemas.APIResponseBook'
         "400":
-          description: We need ID!!
+          description: Bad Request
           schema:
             $ref: '#/definitions/schemas.APIResponse400'
         "404":
-          description: Can not find ID
+          description: Not Found
           schema:
             $ref: '#/definitions/schemas.APIResponse404'
       summary: Post a book
@@ -108,13 +155,13 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/schemas.BookRequest'
+            $ref: '#/definitions/schemas.APIResponse200'
         "400":
-          description: We need ID!!
+          description: Bad Request
           schema:
             $ref: '#/definitions/schemas.APIResponse400'
         "404":
-          description: Can not find ID
+          description: Not Found
           schema:
             $ref: '#/definitions/schemas.APIResponse404'
       summary: Delete book by ID
@@ -136,13 +183,13 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/schemas.BookRequest'
+            $ref: '#/definitions/schemas.APIResponseBook'
         "400":
-          description: We need ID!!
+          description: Bad Request
           schema:
             $ref: '#/definitions/schemas.APIResponse400'
         "404":
-          description: Can not find ID
+          description: Not Found
           schema:
             $ref: '#/definitions/schemas.APIResponse404'
       summary: Find book by ID
@@ -170,13 +217,13 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: '#/definitions/schemas.BookRequest'
+            $ref: '#/definitions/schemas.APIResponseBook'
         "400":
-          description: We need ID!!
+          description: Bad Request
           schema:
             $ref: '#/definitions/schemas.APIResponse400'
         "404":
-          description: Can not find ID
+          description: Not Found
           schema:
             $ref: '#/definitions/schemas.APIResponse404'
       summary: Update the book by ID
