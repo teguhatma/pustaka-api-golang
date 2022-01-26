@@ -43,7 +43,7 @@ func (r *dbRepository) FindAll() ([]Book, error) {
 func (r *dbRepository) FindById(ID int) (Book, error) {
 	var book Book
 
-	err := r.db.Find(&book, ID).Error
+	err := r.db.First(&book, ID).Error
 
 	return book, err
 }
@@ -57,13 +57,15 @@ func (r *dbRepository) Create(book Book) (Book, error) {
 func (r *dbRepository) Delete(ID int) (Book, error) {
 	var book Book
 
-	err := r.db.Delete(&book, ID).Error
+	err := r.db.First(&book, ID).Delete(ID).Error
 
 	return book, err
 }
 
-func (r *dbRepository) Update(book Book, ID int) (Book, error) {
-	err := r.db.Where("id=?", ID).Updates(&book).Error
+func (r *dbRepository) Update(b Book, ID int) (Book, error) {
+	var book Book
+
+	err := r.db.First(&book, ID).Updates(&b).Error
 
 	return book, err
 }

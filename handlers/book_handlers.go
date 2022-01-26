@@ -108,11 +108,12 @@ func (h *bookHandler) DeleteBookHandler(c *gin.Context) {
 	_, err := h.bookService.Delete(ID)
 
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": err,
-			"code":  400,
-			"msg":   "bad request",
+		c.JSON(http.StatusNotFound, gin.H{
+			"error": err.Error(),
+			"code":  404,
+			"msg":   "not found",
 		})
+		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
@@ -137,11 +138,12 @@ func (h *bookHandler) FindByIDBookHandler(c *gin.Context) {
 	result, err := h.bookService.FindById(ID)
 
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": err,
-			"msg":   "bad request",
-			"code":  400,
+		c.JSON(http.StatusNotFound, gin.H{
+			"error": err.Error(),
+			"msg":   "not found",
+			"code":  404,
 		})
+		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
@@ -186,10 +188,10 @@ func (h *bookHandler) UpdateBookHandler(c *gin.Context) {
 
 	book, err := h.bookService.Update(bookRequest, ID)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": err,
-			"code":  400,
-			"msg":   "bad request",
+		c.JSON(http.StatusNotFound, gin.H{
+			"error": err.Error(),
+			"code":  404,
+			"msg":   "not found",
 		})
 		return
 	}

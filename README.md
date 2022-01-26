@@ -5,7 +5,7 @@
 1. Ubah yang belum di service handler ✅
 2. Do all function in handler (Create ✅, Reads ✅, Update ✅, Delete ✅, ReadByID ✅)
 3. Sesuain response dengan schema ✅
-4. Error handler di Findbyid dan delete pada resultnya
+4. Error handler di Findbyid, delete, update pada resultnya ✅
 5. Use environment ✅
 
 ## Flow App
