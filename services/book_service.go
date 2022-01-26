@@ -6,51 +6,51 @@ import (
 )
 
 type BookService interface {
-	FindAll() ([]repository.Book, error)
-	FindById(ID int) (repository.Book, error)
-	Create(book schemas.BookRequest) (repository.Book, error)
-	Delete(ID int) (repository.Book, error)
-	Update(book schemas.BookRequest, ID int) (repository.Book, error)
+	FindBookAll() ([]repository.Book, error)
+	FindBookById(ID int) (repository.Book, error)
+	CreateBook(book schemas.BookRequest) (repository.Book, error)
+	DeleteBook(ID int) (repository.Book, error)
+	UpdateBook(book schemas.BookRequest, ID int) (repository.Book, error)
 }
 
-type service struct {
+type bookService struct {
 	repository repository.BookRepository
 }
 
-func NewService(repository repository.BookRepository) *service {
-	return &service{repository}
+func BookNewService(repository repository.BookRepository) *bookService {
+	return &bookService{repository}
 }
 
-func (s *service) FindAll() ([]repository.Book, error) {
-	return s.repository.FindAll()
+func (s *bookService) FindBookAll() ([]repository.Book, error) {
+	return s.repository.FindBookAll()
 }
 
-func (s *service) FindById(ID int) (repository.Book, error) {
-	return s.repository.FindById(ID)
+func (s *bookService) FindBookById(ID int) (repository.Book, error) {
+	return s.repository.FindBookById(ID)
 }
 
-func (s *service) Create(bookRequest schemas.BookRequest) (repository.Book, error) {
+func (s *bookService) CreateBook(bookRequest schemas.BookRequest) (repository.Book, error) {
 	book := repository.Book{
 		Title:       bookRequest.Title,
 		Price:       bookRequest.Price,
 		Description: bookRequest.Description,
 		Rating:      bookRequest.Rating,
 	}
-	newBook, err := s.repository.Create(book)
+	newBook, err := s.repository.CreateBook(book)
 	return newBook, err
 }
 
-func (s *service) Delete(ID int) (repository.Book, error) {
-	return s.repository.Delete(ID)
+func (s *bookService) DeleteBook(ID int) (repository.Book, error) {
+	return s.repository.DeleteBook(ID)
 }
 
-func (s *service) Update(bookRequest schemas.BookRequest, ID int) (repository.Book, error) {
+func (s *bookService) UpdateBook(bookRequest schemas.BookRequest, ID int) (repository.Book, error) {
 	book := repository.Book{
 		Title:       bookRequest.Title,
 		Price:       bookRequest.Price,
 		Description: bookRequest.Description,
 		Rating:      bookRequest.Rating,
 	}
-	newBook, err := s.repository.Update(book, ID)
+	newBook, err := s.repository.UpdateBook(book, ID)
 	return newBook, err
 }

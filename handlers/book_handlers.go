@@ -30,7 +30,7 @@ func NewBookHandler(bookService services.BookService) *bookHandler {
 // @Failure 404 {object} bookSchema.APIResponse404 "Not Found"
 // @Router /books [get]
 func (h *bookHandler) BooksHandler(c *gin.Context) {
-	result, err := h.bookService.FindAll()
+	result, err := h.bookService.FindBookAll()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err,
@@ -75,7 +75,7 @@ func (h *bookHandler) PostBookHandler(c *gin.Context) {
 		return
 	}
 
-	book, err := h.bookService.Create(bookRequest)
+	book, err := h.bookService.CreateBook(bookRequest)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err,
@@ -105,7 +105,7 @@ func (h *bookHandler) PostBookHandler(c *gin.Context) {
 func (h *bookHandler) DeleteBookHandler(c *gin.Context) {
 	id := c.Param("id")
 	ID, _ := strconv.Atoi(id)
-	_, err := h.bookService.Delete(ID)
+	_, err := h.bookService.DeleteBook(ID)
 
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{
@@ -135,7 +135,7 @@ func (h *bookHandler) DeleteBookHandler(c *gin.Context) {
 func (h *bookHandler) FindByIDBookHandler(c *gin.Context) {
 	id := c.Param("id")
 	ID, _ := strconv.Atoi(id)
-	result, err := h.bookService.FindById(ID)
+	result, err := h.bookService.FindBookById(ID)
 
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{
@@ -186,7 +186,7 @@ func (h *bookHandler) UpdateBookHandler(c *gin.Context) {
 		return
 	}
 
-	book, err := h.bookService.Update(bookRequest, ID)
+	book, err := h.bookService.UpdateBook(bookRequest, ID)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{
 			"error": err.Error(),

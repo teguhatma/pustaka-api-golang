@@ -8,6 +8,22 @@
 4. Error handler di Findbyid, delete, update pada resultnya ✅
 5. Use environment ✅
 
+---
+
+- Table user
+
+---
+
+1. Create table ✅
+2. Do all function in handler (Create, Reads, Update, Delete, ReadByID)
+3. Make email unique
+4. Dont showing password in APIResponse ✅
+5. Password hasing to store in DB
+6. Relation each other (one-to-one)
+7. Make Code better (DIY, etc)
+8. Authentication (Bearer)
+9. Update book with image store in AWS S3
+
 ## Flow App
 
 ---

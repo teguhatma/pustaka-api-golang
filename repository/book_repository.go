@@ -2,20 +2,14 @@ package repository
 
 import (
 	"time"
-
-	"gorm.io/gorm"
 )
 
-type dbRepository struct {
-	db *gorm.DB
-}
-
 type BookRepository interface {
-	FindAll() ([]Book, error)
-	FindById(ID int) (Book, error)
-	Create(book Book) (Book, error)
-	Delete(ID int) (Book, error)
-	Update(book Book, ID int) (Book, error)
+	FindBookAll() ([]Book, error)
+	FindBookById(ID int) (Book, error)
+	CreateBook(book Book) (Book, error)
+	DeleteBook(ID int) (Book, error)
+	UpdateBook(book Book, ID int) (Book, error)
 }
 
 type Book struct {
@@ -28,11 +22,7 @@ type Book struct {
 	UpdatedAt   time.Time
 }
 
-func NewRepository(db *gorm.DB) *dbRepository {
-	return &dbRepository{db}
-}
-
-func (r *dbRepository) FindAll() ([]Book, error) {
+func (r *DBRepository) FindBookAll() ([]Book, error) {
 	var books []Book
 
 	err := r.db.Find(&books).Error
@@ -40,7 +30,7 @@ func (r *dbRepository) FindAll() ([]Book, error) {
 	return books, err
 }
 
-func (r *dbRepository) FindById(ID int) (Book, error) {
+func (r *DBRepository) FindBookById(ID int) (Book, error) {
 	var book Book
 
 	err := r.db.First(&book, ID).Error
@@ -48,13 +38,13 @@ func (r *dbRepository) FindById(ID int) (Book, error) {
 	return book, err
 }
 
-func (r *dbRepository) Create(book Book) (Book, error) {
+func (r *DBRepository) CreateBook(book Book) (Book, error) {
 	err := r.db.Create(&book).Error
 
 	return book, err
 }
 
-func (r *dbRepository) Delete(ID int) (Book, error) {
+func (r *DBRepository) DeleteBook(ID int) (Book, error) {
 	var book Book
 
 	err := r.db.First(&book, ID).Delete(ID).Error
@@ -62,7 +52,7 @@ func (r *dbRepository) Delete(ID int) (Book, error) {
 	return book, err
 }
 
-func (r *dbRepository) Update(b Book, ID int) (Book, error) {
+func (r *DBRepository) UpdateBook(b Book, ID int) (Book, error) {
 	var book Book
 
 	err := r.db.First(&book, ID).Updates(&b).Error

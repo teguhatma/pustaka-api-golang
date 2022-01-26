@@ -16,7 +16,7 @@ definitions:
       error:
         type: string
       message:
-        example: not found
+        example: bad request
         type: string
     type: object
   schemas.APIResponse404:
@@ -27,7 +27,7 @@ definitions:
       error:
         type: string
       message:
-        example: bad request
+        example: not found
         type: string
     type: object
   schemas.APIResponseBook:
@@ -52,6 +52,17 @@ definitions:
         type: array
       message:
         example: success
+        type: string
+    type: object
+  schemas.APIResponseUser:
+    properties:
+      code:
+        example: 200
+        type: integer
+      data:
+        $ref: '#/definitions/schemas.UserResponse'
+      message:
+        example: message
         type: string
     type: object
   schemas.BookRequest:
@@ -80,6 +91,32 @@ definitions:
         type: integer
       rating:
         type: integer
+      updatedAt:
+        type: string
+    type: object
+  schemas.UserRequest:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - name
+    - password
+    type: object
+  schemas.UserResponse:
+    properties:
+      createdAt:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
       updatedAt:
         type: string
     type: object
@@ -229,4 +266,63 @@ paths:
       summary: Update the book by ID
       tags:
       - Books
+  /users:
+    post:
+      consumes:
+      - application/json
+      description: Create a user
+      parameters:
+      - description: Body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.UserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/schemas.APIResponseUser'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.APIResponse400'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/schemas.APIResponse404'
+      summary: Create a user
+      tags:
+      - Users
+  /users/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Find user by ID
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/schemas.APIResponseUser'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.APIResponse400'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/schemas.APIResponse404'
+      summary: Find user by ID
+      tags:
+      - Users
 swagger: "2.0"
