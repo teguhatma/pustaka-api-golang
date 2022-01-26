@@ -2,13 +2,13 @@ package schemas
 
 type APIResponse404 struct {
 	Code    int    `example:"404"`
-	Message string `example:"bad request"`
+	Message string `example:"not found"`
 	Error   string
 }
 
 type APIResponse400 struct {
 	Code    int    `example:"400"`
-	Message string `example:"not found"`
+	Message string `example:"bad request"`
 	Error   string
 }
 
