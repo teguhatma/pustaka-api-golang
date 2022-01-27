@@ -18,7 +18,7 @@
 2. Do all function in handler (Create ✅, Reads ✅, Update ✅, Delete ✅, ReadByID ✅)
 3. Make email unique
 4. Dont showing password in APIResponse ✅
-5. Password hasing to store in DB
+5. Password hashing to store in DB ✅
 6. Relation each other (one-to-one)
 7. Make Code better (dry, etc)
 8. Authentication (Bearer)

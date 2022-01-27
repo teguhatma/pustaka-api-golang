@@ -49,7 +49,7 @@ func (r *DBRepository) DeleteUser(ID int) (User, error) {
 	return user, err
 }
 
-func (r *DBRepository) UpdateUser(u User, ID int) (User, error){
+func (r *DBRepository) UpdateUser(u User, ID int) (User, error) {
 	var user User
 
 	err := r.db.First(&user, ID).Updates(&u).Error

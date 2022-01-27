@@ -217,6 +217,6 @@ func (h *userHandler) UpdateUserByIdHandler(c *gin.Context) {
 		"code": 200,
 		"msg":  "success",
 		"data": result,
-		},
+	},
 	)
 }

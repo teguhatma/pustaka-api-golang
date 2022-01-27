@@ -3,6 +3,7 @@ package services
 import (
 	"pustaka-api/repository"
 	"pustaka-api/schemas"
+	"pustaka-api/utils"
 )
 
 type UserService interface {
@@ -26,10 +27,11 @@ func (s *userService) FindUserById(ID int) (repository.User, error) {
 }
 
 func (s *userService) CreateUser(userRequest schemas.UserRequest) (repository.User, error) {
+	password, _ := utils.HashPassword(userRequest.Password)
 	user := repository.User{
 		Name:     userRequest.Name,
 		Email:    userRequest.Email,
-		Password: userRequest.Password,
+		Password: password,
 	}
 	newUser, err := s.repository.CreateUser(user)
 	return newUser, err
@@ -43,12 +45,12 @@ func (s *userService) DeleteUser(ID int) (repository.User, error) {
 	return s.repository.DeleteUser(ID)
 }
 
-
-func (s *userService) UpdateUser(userRequest schemas.UserRequest, ID int) (repository.User, error){
+func (s *userService) UpdateUser(userRequest schemas.UserRequest, ID int) (repository.User, error) {
+	password, _ := utils.HashPassword(userRequest.Password)
 	user := repository.User{
-		Name: userRequest.Name,
-		Email: userRequest.Email,
-		Password: userRequest.Password,
+		Name:     userRequest.Name,
+		Email:    userRequest.Email,
+		Password: password,
 	}
 
 	updateUser, err := s.repository.UpdateUser(user, ID)
