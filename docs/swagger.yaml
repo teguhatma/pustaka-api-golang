@@ -62,7 +62,20 @@ definitions:
       data:
         $ref: '#/definitions/schemas.UserResponse'
       message:
-        example: message
+        example: success
+        type: string
+    type: object
+  schemas.APIResponseUsers:
+    properties:
+      code:
+        example: 200
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/schemas.UserResponse'
+        type: array
+      message:
+        example: success
         type: string
     type: object
   schemas.BookRequest:
@@ -267,6 +280,28 @@ paths:
       tags:
       - Books
   /users:
+    get:
+      consumes:
+      - application/json
+      description: Get all user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/schemas.APIResponseUsers'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.APIResponse400'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/schemas.APIResponse404'
+      summary: Get all user
+      tags:
+      - Users
     post:
       consumes:
       - application/json

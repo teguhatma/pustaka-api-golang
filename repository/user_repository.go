@@ -12,8 +12,11 @@ type User struct {
 }
 
 type UserRepository interface {
+	FindUsers() ([]User, error)
 	FindUserById(ID int) (User, error)
 	CreateUser(user User) (User, error)
+	// DeleteUser(ID int) (User, error)
+	// UpdateUser(user User, ID int) (User, error)
 }
 
 func (r *DBRepository) FindUserById(ID int) (User, error) {
@@ -28,4 +31,13 @@ func (r *DBRepository) CreateUser(user User) (User, error) {
 	err := r.db.Create(&user).Error
 
 	return user, err
+}
+
+
+func (r *DBRepository) FindUsers() ([]User, error) {
+	var users []User
+
+	err := r.db.Select("id", "name", "email", "created_at", "updated_at").Find(&users).Error
+
+	return users, err
 }

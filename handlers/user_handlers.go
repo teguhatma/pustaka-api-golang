@@ -108,3 +108,30 @@ func (h *userHandler) CreateUserHandler(c *gin.Context) {
 		},
 	})
 }
+
+// @Tags Users
+// @Summary Get all user
+// @Description Get all user
+// @Accept	json
+// @Produce	json
+// @Success 200 {object} userSchema.APIResponseUsers "Success"
+// @Failure 400 {object} userSchema.APIResponse400 "Bad Request"
+// @Failure 404 {object} userSchema.APIResponse404 "Not Found"
+// @Router /users [get]
+func (h *userHandler) FindUsersHandler(c *gin.Context){
+	result, err := h.userService.FindUsers()
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+			"code": 400,
+			"msg": "bad request",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"data": result,
+		"code": 200,
+		"msg": "success",
+	})
+}

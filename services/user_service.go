@@ -8,6 +8,7 @@ import (
 type UserService interface {
 	FindUserById(ID int) (repository.User, error)
 	CreateUser(user schemas.UserRequest) (repository.User, error)
+	FindUsers() ([]repository.User, error)
 }
 
 type userService struct {
@@ -30,4 +31,8 @@ func (s *userService) CreateUser(userRequest schemas.UserRequest) (repository.Us
 	}
 	newUser, err := s.repository.CreateUser(user)
 	return newUser, err
+}
+
+func (s *userService) FindUsers() ([]repository.User, error){
+	return s.repository.FindUsers()
 }

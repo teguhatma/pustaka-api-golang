@@ -4,7 +4,7 @@ import "time"
 
 type APIResponseUser struct {
 	Code    int    `example:"200"`
-	Message string `example:"message"`
+	Message string `example:"success"`
 	Data    UserResponse
 }
 
@@ -20,4 +20,10 @@ type UserResponse struct {
 	Email     string
 	CreatedAt time.Time
 	UpdatedAt time.Time
+}
+
+type APIResponseUsers struct {
+	Code	int 			`example:"200"`
+	Message	string			`example:"success"`
+	Data	[]UserResponse
 }
