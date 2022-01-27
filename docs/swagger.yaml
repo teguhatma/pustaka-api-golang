@@ -400,4 +400,38 @@ paths:
       summary: Find user by ID
       tags:
       - Users
+    put:
+      consumes:
+      - application/json
+      description: Update user by Id
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.UserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/schemas.APIResponseUser'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.APIResponse400'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/schemas.APIResponse404'
+      summary: Update user by Id
+      tags:
+      - Users
 swagger: "2.0"

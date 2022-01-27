@@ -169,3 +169,54 @@ func (h *userHandler) DeleteUserHandler(c *gin.Context) {
 		"id":   result.ID,
 	})
 }
+
+// @Tags Users
+// @Summary Update user by Id
+// @Description Update user by Id
+// @Accept	json
+// @Produce	json
+// @Param id path int true "id"
+// @Param body body userSchema.UserRequest true "Body"
+// @Success 200 {object} userSchema.APIResponseUser "Success"
+// @Failure 400 {object} userSchema.APIResponse400 "Bad Request"
+// @Failure 404 {object} userSchema.APIResponse404 "Not Found"
+// @Router /users/{id} [put]
+func (h *userHandler) UpdateUserByIdHandler(c *gin.Context) {
+	var userRequest userSchema.UserRequest
+
+	id := c.Param("id")
+	ID, _ := strconv.Atoi(id)
+
+	err := c.ShouldBindJSON(&userRequest)
+
+	errorMessages := []string{}
+	if err != nil {
+		for _, e := range err.(validator.ValidationErrors) {
+			errorMessage := fmt.Sprintf("Error on field %s, condition %s", e.Field(), e.ActualTag())
+			errorMessages = append(errorMessages, errorMessage)
+		}
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": errorMessages,
+			"code":  400,
+			"msg":   "bad request",
+		})
+		return
+	}
+
+	result, err := h.userService.UpdateUser(userRequest, ID)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{
+			"error": err.Error(),
+			"code":  404,
+			"msg":   "not found",
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"code": 200,
+		"msg":  "success",
+		"data": result,
+		},
+	)
+}

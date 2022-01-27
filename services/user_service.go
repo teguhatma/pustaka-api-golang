@@ -10,6 +10,7 @@ type UserService interface {
 	CreateUser(user schemas.UserRequest) (repository.User, error)
 	FindUsers() ([]repository.User, error)
 	DeleteUser(ID int) (repository.User, error)
+	UpdateUser(user schemas.UserRequest, ID int) (repository.User, error)
 }
 
 type userService struct {
@@ -40,4 +41,16 @@ func (s *userService) FindUsers() ([]repository.User, error) {
 
 func (s *userService) DeleteUser(ID int) (repository.User, error) {
 	return s.repository.DeleteUser(ID)
+}
+
+
+func (s *userService) UpdateUser(userRequest schemas.UserRequest, ID int) (repository.User, error){
+	user := repository.User{
+		Name: userRequest.Name,
+		Email: userRequest.Email,
+		Password: userRequest.Password,
+	}
+
+	updateUser, err := s.repository.UpdateUser(user, ID)
+	return updateUser, err
 }
