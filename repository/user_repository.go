@@ -4,8 +4,8 @@ import "time"
 
 type User struct {
 	ID        uint
-	Name      string
-	Email     string
+	Name      string 	
+	Email     string	`gorm:"uniqueIndex"`
 	Password  string
 	CreatedAt time.Time
 	UpdatedAt time.Time

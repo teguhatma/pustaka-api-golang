@@ -89,7 +89,7 @@ func (h *userHandler) CreateUserHandler(c *gin.Context) {
 	result, err := h.userService.CreateUser(userRequest)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": err,
+			"error": err.Error(),
 			"code":  400,
 			"msg":   "bad request",
 		})

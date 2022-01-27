@@ -16,7 +16,7 @@
 
 1. Create table ✅
 2. Do all function in handler (Create ✅, Reads ✅, Update ✅, Delete ✅, ReadByID ✅)
-3. Make email unique
+3. Make email unique ✅
 4. Dont showing password in APIResponse ✅
 5. Password hashing to store in DB ✅
 6. Relation each other (one-to-one)
