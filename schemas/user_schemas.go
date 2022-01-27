@@ -23,7 +23,7 @@ type UserResponse struct {
 }
 
 type APIResponseUsers struct {
-	Code	int 			`example:"200"`
-	Message	string			`example:"success"`
-	Data	[]UserResponse
+	Code    int    `example:"200"`
+	Message string `example:"success"`
+	Data    []UserResponse
 }

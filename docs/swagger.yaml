@@ -54,6 +54,18 @@ definitions:
         example: success
         type: string
     type: object
+  schemas.APIResponseDelete200:
+    properties:
+      code:
+        example: 200
+        type: integer
+      id:
+        example: 1
+        type: integer
+      message:
+        example: success
+        type: string
+    type: object
   schemas.APIResponseUser:
     properties:
       code:
@@ -332,6 +344,34 @@ paths:
       tags:
       - Users
   /users/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete user by ID
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/schemas.APIResponseDelete200'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.APIResponse400'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/schemas.APIResponse404'
+      summary: Delete user by ID
+      tags:
+      - Users
     get:
       consumes:
       - application/json

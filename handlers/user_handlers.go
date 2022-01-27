@@ -118,13 +118,13 @@ func (h *userHandler) CreateUserHandler(c *gin.Context) {
 // @Failure 400 {object} userSchema.APIResponse400 "Bad Request"
 // @Failure 404 {object} userSchema.APIResponse404 "Not Found"
 // @Router /users [get]
-func (h *userHandler) FindUsersHandler(c *gin.Context){
+func (h *userHandler) FindUsersHandler(c *gin.Context) {
 	result, err := h.userService.FindUsers()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
-			"code": 400,
-			"msg": "bad request",
+			"code":  400,
+			"msg":   "bad request",
 		})
 		return
 	}
@@ -132,6 +132,40 @@ func (h *userHandler) FindUsersHandler(c *gin.Context){
 	c.JSON(http.StatusOK, gin.H{
 		"data": result,
 		"code": 200,
-		"msg": "success",
+		"msg":  "success",
+	})
+}
+
+// @Tags	Users
+// @Summary Delete user by ID
+// @Description Delete user by ID
+// @Accept	json
+// @Produce json
+// @Param id path int true "id"
+// @Success 200 {object} userSchema.APIResponseDelete200 "Success"
+// @Failure 400 {object} userSchema.APIResponse400 "Bad Request"
+// @Failure 404 {object} userSchema.APIResponse404 "Not Found"
+// @Router /users/{id} [delete]
+func (h *userHandler) DeleteUserHandler(c *gin.Context) {
+	id := c.Param("id")
+	ID, _ := strconv.Atoi(id)
+
+	result, err := h.userService.DeleteUser(ID)
+
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{
+			"code":  404,
+			"msg":   "not found",
+			"error": err.Error(),
+		})
+		return
+	}
+
+	fmt.Println(result)
+
+	c.JSON(http.StatusOK, gin.H{
+		"code": 200,
+		"msg":  "success",
+		"id":   result.ID,
 	})
 }

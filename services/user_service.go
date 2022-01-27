@@ -9,6 +9,7 @@ type UserService interface {
 	FindUserById(ID int) (repository.User, error)
 	CreateUser(user schemas.UserRequest) (repository.User, error)
 	FindUsers() ([]repository.User, error)
+	DeleteUser(ID int) (repository.User, error)
 }
 
 type userService struct {
@@ -33,6 +34,10 @@ func (s *userService) CreateUser(userRequest schemas.UserRequest) (repository.Us
 	return newUser, err
 }
 
-func (s *userService) FindUsers() ([]repository.User, error){
+func (s *userService) FindUsers() ([]repository.User, error) {
 	return s.repository.FindUsers()
+}
+
+func (s *userService) DeleteUser(ID int) (repository.User, error) {
+	return s.repository.DeleteUser(ID)
 }

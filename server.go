@@ -53,6 +53,7 @@ func main() {
 			gruser.GET("/:id", userHandler.FindUserByIdHandler)
 			gruser.POST("", userHandler.CreateUserHandler)
 			gruser.GET("", userHandler.FindUsersHandler)
+			gruser.DELETE(":id", userHandler.DeleteUserHandler)
 		}
 	}
 
