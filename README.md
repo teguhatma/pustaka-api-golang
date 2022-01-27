@@ -15,7 +15,7 @@
 ---
 
 1. Create table ✅
-2. Do all function in handler (Create, Reads, Update, Delete, ReadByID)
+2. Do all function in handler (Create ✅, Reads ✅, Update ✅, Delete ✅, ReadByID ✅)
 3. Make email unique
 4. Dont showing password in APIResponse ✅
 5. Password hasing to store in DB
