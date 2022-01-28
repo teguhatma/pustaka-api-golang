@@ -1,34 +1,37 @@
 package repository
 
 import (
+	"pustaka-api/schemas"
 	"time"
 
 	"gorm.io/gorm"
 )
 
+// This user struct only for creating model
+// Not to response model
 type User struct {
 	gorm.Model
-	Books 		[]Book 		`gorm:"foreignKey:UserID;references:ID"`
-	ID        	uint
-	Name      	string 	
-	Email     	string		`gorm:"uniqueIndex"`
-	Password  	string
-	CreatedAt 	time.Time
-	UpdatedAt 	time.Time
+	Books     []Book `gorm:"foreignKey:UserID;references:ID"`
+	ID        uint
+	Name      string
+	Email     string `gorm:"uniqueIndex"`
+	Password  string
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
 
 type UserRepository interface {
-	FindUsers() ([]User, error)
-	FindUserById(ID int) (User, error)
+	FindUsers() ([]schemas.User, error)
+	FindUserById(ID int) (schemas.User, error)
 	CreateUser(user User) (User, error)
 	DeleteUser(ID int) (User, error)
 	UpdateUser(user User, ID int) (User, error)
 }
 
-func (r *DBRepository) FindUserById(ID int) (User, error) {
-	var user User
+func (r *DBRepository) FindUserById(ID int) (schemas.User, error) {
+	var user schemas.User
 
-	err := r.db.Select("id", "name", "email", "created_at", "updated_at").First(&user, ID).Error
+	err := r.db.First(&user, ID).Error
 
 	return user, err
 }
@@ -39,10 +42,10 @@ func (r *DBRepository) CreateUser(user User) (User, error) {
 	return user, err
 }
 
-func (r *DBRepository) FindUsers() ([]User, error) {
-	var users []User
+func (r *DBRepository) FindUsers() ([]schemas.User, error) {
+	var users []schemas.User
 
-	err := r.db.Select("id", "name", "email", "created_at", "updated_at").Find(&users).Error
+	err := r.db.Find(&users).Error
 
 	return users, err
 }
@@ -57,7 +60,6 @@ func (r *DBRepository) DeleteUser(ID int) (User, error) {
 
 func (r *DBRepository) UpdateUser(u User, ID int) (User, error) {
 	var user User
-
 	err := r.db.First(&user, ID).Updates(&u).Error
 
 	return user, err

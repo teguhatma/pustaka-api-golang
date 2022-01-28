@@ -15,15 +15,23 @@ type UserRequest struct {
 }
 
 type UserResponse struct {
-	Id        int
-	Name      string
-	Email     string
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	ID        int       `json:"ID"`
+	Name      string    `json:"Name"`
+	Email     string    `json:"Email"`
+	CreatedAt time.Time `json:"CreatedAt"`
+	UpdatedAt time.Time `json:"UpdatedAt"`
 }
 
 type APIResponseUsers struct {
 	Code    int    `example:"200"`
 	Message string `example:"success"`
 	Data    []UserResponse
+}
+
+type User struct {
+	ID        uint
+	Name      string
+	Email     string
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }

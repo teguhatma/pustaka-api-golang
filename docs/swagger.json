@@ -521,13 +521,13 @@
         "schemas.APIResponseDelete200": {
             "type": "object",
             "properties": {
+                "ID": {
+                    "type": "integer",
+                    "example": 1
+                },
                 "code": {
                     "type": "integer",
                     "example": 200
-                },
-                "id": {
-                    "type": "integer",
-                    "example": 1
                 },
                 "message": {
                     "type": "string",
@@ -588,6 +588,9 @@
                 },
                 "title": {
                     "type": "string"
+                },
+                "userId": {
+                    "type": "integer"
                 }
             }
         },
@@ -636,19 +639,19 @@
         "schemas.UserResponse": {
             "type": "object",
             "properties": {
-                "createdAt": {
+                "CreatedAt": {
                     "type": "string"
                 },
-                "email": {
+                "Email": {
                     "type": "string"
                 },
-                "id": {
+                "ID": {
                     "type": "integer"
                 },
-                "name": {
+                "Name": {
                     "type": "string"
                 },
-                "updatedAt": {
+                "UpdatedAt": {
                     "type": "string"
                 }
             }

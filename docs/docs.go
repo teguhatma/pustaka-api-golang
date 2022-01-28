@@ -540,13 +540,13 @@ var doc = `{
         "schemas.APIResponseDelete200": {
             "type": "object",
             "properties": {
+                "ID": {
+                    "type": "integer",
+                    "example": 1
+                },
                 "code": {
                     "type": "integer",
                     "example": 200
-                },
-                "id": {
-                    "type": "integer",
-                    "example": 1
                 },
                 "message": {
                     "type": "string",
@@ -607,6 +607,9 @@ var doc = `{
                 },
                 "title": {
                     "type": "string"
+                },
+                "userId": {
+                    "type": "integer"
                 }
             }
         },
@@ -655,19 +658,19 @@ var doc = `{
         "schemas.UserResponse": {
             "type": "object",
             "properties": {
-                "createdAt": {
+                "CreatedAt": {
                     "type": "string"
                 },
-                "email": {
+                "Email": {
                     "type": "string"
                 },
-                "id": {
+                "ID": {
                     "type": "integer"
                 },
-                "name": {
+                "Name": {
                     "type": "string"
                 },
-                "updatedAt": {
+                "UpdatedAt": {
                     "type": "string"
                 }
             }

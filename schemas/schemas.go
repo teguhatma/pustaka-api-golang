@@ -20,5 +20,5 @@ type APIResponse200 struct {
 type APIResponseDelete200 struct {
 	Code    int    `example:"200"`
 	Message string `example:"success"`
-	Id      int    `example:"1"`
+	Id      int    `example:"1" json:"ID"`
 }

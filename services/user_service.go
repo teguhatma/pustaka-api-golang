@@ -7,9 +7,9 @@ import (
 )
 
 type UserService interface {
-	FindUserById(ID int) (repository.User, error)
+	FindUserById(ID int) (schemas.User, error)
 	CreateUser(user schemas.UserRequest) (repository.User, error)
-	FindUsers() ([]repository.User, error)
+	FindUsers() ([]schemas.User, error)
 	DeleteUser(ID int) (repository.User, error)
 	UpdateUser(user schemas.UserRequest, ID int) (repository.User, error)
 }
@@ -22,7 +22,7 @@ func UserNewService(repository repository.UserRepository) *userService {
 	return &userService{repository}
 }
 
-func (s *userService) FindUserById(ID int) (repository.User, error) {
+func (s *userService) FindUserById(ID int) (schemas.User, error) {
 	return s.repository.FindUserById(ID)
 }
 
@@ -33,12 +33,16 @@ func (s *userService) CreateUser(userRequest schemas.UserRequest) (repository.Us
 		Email:    userRequest.Email,
 		Password: password,
 	}
-	newUser, err := s.repository.CreateUser(user)
-	return newUser, err
+	res, err := s.repository.CreateUser(user)
+	return res, err
 }
 
-func (s *userService) FindUsers() ([]repository.User, error) {
-	return s.repository.FindUsers()
+func (s *userService) FindUsers() ([]schemas.User, error) {
+	// var users []schemas.UserResponse
+
+	res, err := s.repository.FindUsers()
+
+	return res, err
 }
 
 func (s *userService) DeleteUser(ID int) (repository.User, error) {
@@ -53,6 +57,6 @@ func (s *userService) UpdateUser(userRequest schemas.UserRequest, ID int) (repos
 		Password: password,
 	}
 
-	updateUser, err := s.repository.UpdateUser(user, ID)
-	return updateUser, err
+	res, err := s.repository.UpdateUser(user, ID)
+	return res, err
 }

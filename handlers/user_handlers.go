@@ -33,11 +33,12 @@ func NewUserHandler(userService services.UserService) *userHandler {
 func (h *userHandler) FindUserByIdHandler(c *gin.Context) {
 	id := c.Param("id")
 	ID, _ := strconv.Atoi(id)
-	result, err := h.userService.FindUserById(ID)
+	res, err := h.userService.FindUserById(ID)
 
+	fmt.Println(err)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{
-			"error": err.Error(),
+			"error": err,
 			"msg":   "not found",
 			"code":  404,
 		})
@@ -47,13 +48,7 @@ func (h *userHandler) FindUserByIdHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"code": 200,
 		"msg":  "success",
-		"data": map[string]string{
-			"id":         fmt.Sprint(result.ID),
-			"name":       result.Name,
-			"email":      result.Email,
-			"created_at": fmt.Sprint(result.CreatedAt),
-			"updated_at": fmt.Sprint(result.UpdatedAt),
-		},
+		"data": res,
 	})
 }
 
@@ -86,9 +81,9 @@ func (h *userHandler) CreateUserHandler(c *gin.Context) {
 		return
 	}
 
-	result, err := h.userService.CreateUser(userRequest)
+	res, err := h.userService.CreateUser(userRequest)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
+		c.JSON(http.StatusNotFound, gin.H{
 			"error": err.Error(),
 			"code":  400,
 			"msg":   "bad request",
@@ -99,12 +94,12 @@ func (h *userHandler) CreateUserHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"code": 200,
 		"msg":  "success",
-		"data": map[string]string{
-			"id":         fmt.Sprint(result.ID),
-			"name":       result.Name,
-			"email":      result.Email,
-			"created_at": fmt.Sprint(result.CreatedAt),
-			"updated_at": fmt.Sprint(result.UpdatedAt),
+		"data": map[string]interface{}{
+			"ID":        res.ID,
+			"Name":      res.Name,
+			"Email":     res.Email,
+			"CreatedAt": res.CreatedAt,
+			"UpdatedAt": res.UpdatedAt,
 		},
 	})
 }
@@ -119,7 +114,7 @@ func (h *userHandler) CreateUserHandler(c *gin.Context) {
 // @Failure 404 {object} userSchema.APIResponse404 "Not Found"
 // @Router /users [get]
 func (h *userHandler) FindUsersHandler(c *gin.Context) {
-	result, err := h.userService.FindUsers()
+	res, err := h.userService.FindUsers()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
@@ -130,7 +125,7 @@ func (h *userHandler) FindUsersHandler(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"data": result,
+		"data": res,
 		"code": 200,
 		"msg":  "success",
 	})
@@ -166,7 +161,7 @@ func (h *userHandler) DeleteUserHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"code": 200,
 		"msg":  "success",
-		"id":   result.ID,
+		"ID":   result.ID,
 	})
 }
 
@@ -203,7 +198,7 @@ func (h *userHandler) UpdateUserByIdHandler(c *gin.Context) {
 		return
 	}
 
-	result, err := h.userService.UpdateUser(userRequest, ID)
+	res, err := h.userService.UpdateUser(userRequest, ID)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{
 			"error": err.Error(),
@@ -216,7 +211,13 @@ func (h *userHandler) UpdateUserByIdHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"code": 200,
 		"msg":  "success",
-		"data": result,
+		"data": map[string]interface{}{
+			"ID":        res.ID,
+			"Name":      res.Name,
+			"Email":     res.Email,
+			"CreatedAt": res.CreatedAt,
+			"UpdatedAt": res.UpdatedAt,
+		},
 	},
 	)
 }

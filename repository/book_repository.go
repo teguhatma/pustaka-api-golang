@@ -16,7 +16,7 @@ type BookRepository interface {
 
 type Book struct {
 	gorm.Model
-	UserID		int
+	UserID      int
 	ID          uint
 	Title       string
 	Description string

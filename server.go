@@ -19,7 +19,7 @@ func main() {
 	db := utils.DatabaseConn()
 
 	// Migration
-	utils.DatabaseMigration(db)
+	// utils.DatabaseMigration(db)
 
 	rGlobal := repository.NewRepository(db)
 

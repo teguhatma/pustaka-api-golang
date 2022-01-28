@@ -19,6 +19,7 @@ type BookRequest struct {
 	Price       int    `json:"price" binding:"required,number"`
 	Description string `json:"description"`
 	Rating      int    `json:"rating"`
+	UserID      int    `json:"userId"`
 }
 
 type BookResponse struct {

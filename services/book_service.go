@@ -35,6 +35,7 @@ func (s *bookService) CreateBook(bookRequest schemas.BookRequest) (repository.Bo
 		Price:       bookRequest.Price,
 		Description: bookRequest.Description,
 		Rating:      bookRequest.Rating,
+		UserID:      bookRequest.UserID,
 	}
 	newBook, err := s.repository.CreateBook(book)
 	return newBook, err
@@ -50,6 +51,7 @@ func (s *bookService) UpdateBook(bookRequest schemas.BookRequest, ID int) (repos
 		Price:       bookRequest.Price,
 		Description: bookRequest.Description,
 		Rating:      bookRequest.Rating,
+		UserID:      bookRequest.UserID,
 	}
 	newBook, err := s.repository.UpdateBook(book, ID)
 	return newBook, err
