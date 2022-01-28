@@ -2,6 +2,8 @@ package repository
 
 import (
 	"time"
+
+	"gorm.io/gorm"
 )
 
 type BookRepository interface {
@@ -13,6 +15,8 @@ type BookRepository interface {
 }
 
 type Book struct {
+	gorm.Model
+	UserID		int
 	ID          uint
 	Title       string
 	Description string

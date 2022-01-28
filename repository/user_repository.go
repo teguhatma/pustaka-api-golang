@@ -1,14 +1,20 @@
 package repository
 
-import "time"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 type User struct {
-	ID        uint
-	Name      string 	
-	Email     string	`gorm:"uniqueIndex"`
-	Password  string
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	gorm.Model
+	Books 		[]Book 		`gorm:"foreignKey:UserID;references:ID"`
+	ID        	uint
+	Name      	string 	
+	Email     	string		`gorm:"uniqueIndex"`
+	Password  	string
+	CreatedAt 	time.Time
+	UpdatedAt 	time.Time
 }
 
 type UserRepository interface {
