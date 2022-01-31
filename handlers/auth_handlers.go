@@ -12,6 +12,16 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
+// @Tags	Authentication
+// @Summary Sign In
+// @Description Sign In
+// @Accept	json
+// @Produce json
+// @Param body body userSchema.Authentication true "Body"
+// @Success 200 {object} userSchema.APIResponseToken "Success"
+// @Failure 400 {object} userSchema.APIResponse400 "Bad Request"
+// @Failure 404 {object} userSchema.APIResponse404 "Not Found"
+// @Router /auth/signin [post]
 func (h *userHandler) AuthLogin(c *gin.Context) {
 	var userRequest userSchema.Authentication
 

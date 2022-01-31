@@ -66,6 +66,17 @@ definitions:
         example: success
         type: string
     type: object
+  schemas.APIResponseToken:
+    properties:
+      code:
+        example: 200
+        type: integer
+      message:
+        example: success
+        type: string
+      token:
+        type: string
+    type: object
   schemas.APIResponseUser:
     properties:
       code:
@@ -88,6 +99,13 @@ definitions:
         type: array
       message:
         example: success
+        type: string
+    type: object
+  schemas.Authentication:
+    properties:
+      email:
+        type: string
+      password:
         type: string
     type: object
   schemas.BookRequest:
@@ -150,6 +168,36 @@ definitions:
 info:
   contact: {}
 paths:
+  /auth/signin:
+    post:
+      consumes:
+      - application/json
+      description: Sign In
+      parameters:
+      - description: Body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/schemas.Authentication'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/schemas.APIResponseToken'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/schemas.APIResponse400'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/schemas.APIResponse404'
+      summary: Sign In
+      tags:
+      - Authentication
   /books:
     get:
       consumes:
