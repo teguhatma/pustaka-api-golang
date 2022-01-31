@@ -26,6 +26,7 @@ type UserRepository interface {
 	CreateUser(user User) (User, error)
 	DeleteUser(ID int) (User, error)
 	UpdateUser(user User, ID int) (User, error)
+	FindUserByEmail(Email string) (User, error)
 }
 
 func (r *DBRepository) FindUserById(ID int) (schemas.User, error) {
@@ -61,6 +62,14 @@ func (r *DBRepository) DeleteUser(ID int) (User, error) {
 func (r *DBRepository) UpdateUser(u User, ID int) (User, error) {
 	var user User
 	err := r.db.First(&user, ID).Updates(&u).Error
+
+	return user, err
+}
+
+func (r *DBRepository) FindUserByEmail(Email string) (User, error) {
+	var user User
+
+	err := r.db.Where("email=?", Email).First(&user).Error
 
 	return user, err
 }

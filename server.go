@@ -56,6 +56,10 @@ func main() {
 			gruser.DELETE(":id", userHandler.DeleteUserHandler)
 			gruser.PUT(":id", userHandler.UpdateUserByIdHandler)
 		}
+		grauth := v1.Group("/auth")
+		{
+			grauth.POST("/signin", userHandler.AuthLogin)
+		}
 	}
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

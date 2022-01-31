@@ -156,8 +156,6 @@ func (h *userHandler) DeleteUserHandler(c *gin.Context) {
 		return
 	}
 
-	fmt.Println(result)
-
 	c.JSON(http.StatusOK, gin.H{
 		"code": 200,
 		"msg":  "success",
