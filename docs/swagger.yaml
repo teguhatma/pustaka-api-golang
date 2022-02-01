@@ -19,6 +19,15 @@ definitions:
         example: bad request
         type: string
     type: object
+  schemas.APIResponse401:
+    properties:
+      code:
+        example: 401
+        type: integer
+      message:
+        example: unauthorized
+        type: string
+    type: object
   schemas.APIResponse404:
     properties:
       code:
@@ -214,6 +223,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/schemas.APIResponse400'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.APIResponse401'
         "404":
           description: Not Found
           schema:
@@ -243,6 +256,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/schemas.APIResponse400'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.APIResponse401'
         "404":
           description: Not Found
           schema:
@@ -272,6 +289,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/schemas.APIResponse400'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.APIResponse401'
         "404":
           description: Not Found
           schema:
@@ -300,6 +321,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/schemas.APIResponse400'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.APIResponse401'
         "404":
           description: Not Found
           schema:
@@ -334,6 +359,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/schemas.APIResponse400'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.APIResponse401'
         "404":
           description: Not Found
           schema:
@@ -357,6 +386,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/schemas.APIResponse400'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.APIResponse401'
         "404":
           description: Not Found
           schema:
@@ -386,6 +419,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/schemas.APIResponse400'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.APIResponse401'
         "404":
           description: Not Found
           schema:
@@ -415,6 +452,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/schemas.APIResponse400'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.APIResponse401'
         "404":
           description: Not Found
           schema:
@@ -443,6 +484,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/schemas.APIResponse400'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.APIResponse401'
         "404":
           description: Not Found
           schema:
@@ -477,6 +522,10 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/schemas.APIResponse400'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/schemas.APIResponse401'
         "404":
           description: Not Found
           schema:

@@ -63,6 +63,8 @@ func (h *userHandler) AuthLogin(c *gin.Context) {
 
 	token, _ := auth_jwt.GenerateJWT(res.Email)
 
+	h.userService.SaveUserToken(token, res.Email)
+
 	c.JSON(http.StatusOK, gin.H{
 		"code":  200,
 		"msg":   "success",

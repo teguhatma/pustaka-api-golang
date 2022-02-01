@@ -13,6 +13,7 @@ type UserService interface {
 	DeleteUser(ID int) (repository.User, error)
 	UpdateUser(user schemas.UserRequest, ID int) (repository.User, error)
 	FindUserByEmail(Email string) (repository.User, error)
+	SaveUserToken(Token, Email string) error
 }
 
 type userService struct {
@@ -64,4 +65,8 @@ func (s *userService) UpdateUser(userRequest schemas.UserRequest, ID int) (repos
 
 func (s *userService) FindUserByEmail(Email string) (repository.User, error) {
 	return s.repository.FindUserByEmail(Email)
+}
+
+func (s *userService) SaveUserToken(Token, Email string) error {
+	return s.repository.SaveUserToken(Token, Email)
 }

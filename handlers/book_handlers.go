@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"pustaka-api/config/auths"
 	bookSchema "pustaka-api/schemas"
 	"pustaka-api/services"
 
@@ -28,8 +29,18 @@ func NewBookHandler(bookService services.BookService) *bookHandler {
 // @Success 200 {object} bookSchema.APIResponseBooks "Success"
 // @Failure 400 {object} bookSchema.APIResponse400 "Bad Request"
 // @Failure 404 {object} bookSchema.APIResponse404 "Not Found"
+// @Failure 401 {object} bookSchema.APIResponse401 "Unauthorized"
 // @Router /books [get]
 func (h *bookHandler) BooksHandler(c *gin.Context) {
+	authorizer, _ := auths.Authorize(c)
+	if !authorizer {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"message": "Unauthorized",
+			"code":    401,
+		})
+		return
+	}
+
 	result, err := h.bookService.FindBookAll()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -55,8 +66,17 @@ func (h *bookHandler) BooksHandler(c *gin.Context) {
 // @Success 200 {object} bookSchema.APIResponseBook "Success"
 // @Failure 400 {object} bookSchema.APIResponse400 "Bad Request"
 // @Failure 404 {object} bookSchema.APIResponse404 "Not Found"
+// @Failure 401 {object} bookSchema.APIResponse401 "Unauthorized"
 // @Router /books [post]
 func (h *bookHandler) PostBookHandler(c *gin.Context) {
+	authorizer, _ := auths.Authorize(c)
+	if !authorizer {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"message": "Unauthorized",
+			"code":    401,
+		})
+		return
+	}
 	var bookRequest bookSchema.BookRequest
 
 	err := c.ShouldBindJSON(&bookRequest)
@@ -101,8 +121,18 @@ func (h *bookHandler) PostBookHandler(c *gin.Context) {
 // @Success 200 {object} bookSchema.APIResponse200 "Success"
 // @Failure 400 {object} bookSchema.APIResponse400 "Bad Request"
 // @Failure 404 {object} bookSchema.APIResponse404 "Not Found"
+// @Failure 401 {object} bookSchema.APIResponse401 "Unauthorized"
 // @Router /books/{id} [delete]
 func (h *bookHandler) DeleteBookHandler(c *gin.Context) {
+	authorizer, _ := auths.Authorize(c)
+	if !authorizer {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"message": "Unauthorized",
+			"code":    401,
+		})
+		return
+	}
+
 	id := c.Param("id")
 	ID, _ := strconv.Atoi(id)
 	_, err := h.bookService.DeleteBook(ID)
@@ -131,8 +161,18 @@ func (h *bookHandler) DeleteBookHandler(c *gin.Context) {
 // @Success 200 {object} bookSchema.APIResponseBook "Success"
 // @Failure 400 {object} bookSchema.APIResponse400 "Bad Request"
 // @Failure 404 {object} bookSchema.APIResponse404 "Not Found"
+// @Failure 401 {object} bookSchema.APIResponse401 "Unauthorized"
 // @Router /books/{id} [get]
 func (h *bookHandler) FindByIDBookHandler(c *gin.Context) {
+	authorizer, _ := auths.Authorize(c)
+	if !authorizer {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"message": "Unauthorized",
+			"code":    401,
+		})
+		return
+	}
+
 	id := c.Param("id")
 	ID, _ := strconv.Atoi(id)
 	result, err := h.bookService.FindBookById(ID)
@@ -163,8 +203,18 @@ func (h *bookHandler) FindByIDBookHandler(c *gin.Context) {
 // @Success 200 {object} bookSchema.APIResponseBook "Success"
 // @Failure 400 {object} bookSchema.APIResponse400 "Bad Request"
 // @Failure 404 {object} bookSchema.APIResponse404 "Not Found"
+// @Failure 401 {object} bookSchema.APIResponse401 "Unauthorized"
 // @Router /books/{id} [put]
 func (h *bookHandler) UpdateBookHandler(c *gin.Context) {
+	authorizer, _ := auths.Authorize(c)
+	if !authorizer {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"message": "Unauthorized",
+			"code":    401,
+		})
+		return
+	}
+
 	id := c.Param("id")
 	ID, _ := strconv.Atoi(id)
 

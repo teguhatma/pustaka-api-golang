@@ -22,3 +22,8 @@ type APIResponseDelete200 struct {
 	Message string `example:"success"`
 	Id      int    `example:"1" json:"ID"`
 }
+
+type APIResponse401 struct {
+	Code    int    `example:"401"`
+	Message string `example:"unauthorized"`
+}

@@ -3,6 +3,7 @@ package handlers
 import (
 	"fmt"
 	"net/http"
+	"pustaka-api/config/auths"
 	userSchema "pustaka-api/schemas"
 	"pustaka-api/services"
 
@@ -29,13 +30,22 @@ func NewUserHandler(userService services.UserService) *userHandler {
 // @Success 200 {object} userSchema.APIResponseUser "Success"
 // @Failure 400 {object} userSchema.APIResponse400 "Bad Request"
 // @Failure 404 {object} userSchema.APIResponse404 "Not Found"
+// @Failure 401 {object} userSchema.APIResponse401 "Unauthorized"
 // @Router /users/{id} [get]
 func (h *userHandler) FindUserByIdHandler(c *gin.Context) {
+	authorizer, _ := auths.Authorize(c)
+	if !authorizer {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"message": "Unauthorized",
+			"code":    401,
+		})
+		return
+	}
+
 	id := c.Param("id")
 	ID, _ := strconv.Atoi(id)
 	res, err := h.userService.FindUserById(ID)
 
-	fmt.Println(err)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{
 			"error": err,
@@ -61,8 +71,17 @@ func (h *userHandler) FindUserByIdHandler(c *gin.Context) {
 // @Success 200 {object} userSchema.APIResponseUser "Success"
 // @Failure 400 {object} userSchema.APIResponse400 "Bad Request"
 // @Failure 404 {object} userSchema.APIResponse404 "Not Found"
+// @Failure 401 {object} userSchema.APIResponse401 "Unauthorized"
 // @Router /users [post]
 func (h *userHandler) CreateUserHandler(c *gin.Context) {
+	authorizer, _ := auths.Authorize(c)
+	if !authorizer {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"message": "Unauthorized",
+			"code":    401,
+		})
+		return
+	}
 	var userRequest userSchema.UserRequest
 
 	err := c.ShouldBindJSON(&userRequest)
@@ -112,8 +131,19 @@ func (h *userHandler) CreateUserHandler(c *gin.Context) {
 // @Success 200 {object} userSchema.APIResponseUsers "Success"
 // @Failure 400 {object} userSchema.APIResponse400 "Bad Request"
 // @Failure 404 {object} userSchema.APIResponse404 "Not Found"
+// @Failure 401 {object} userSchema.APIResponse401 "Unauthorized"
 // @Router /users [get]
 func (h *userHandler) FindUsersHandler(c *gin.Context) {
+	// authorize the user
+	authorizer, _ := auths.Authorize(c)
+	if !authorizer {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"message": "Unauthorized",
+			"code":    401,
+		})
+		return
+	}
+
 	res, err := h.userService.FindUsers()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -140,8 +170,17 @@ func (h *userHandler) FindUsersHandler(c *gin.Context) {
 // @Success 200 {object} userSchema.APIResponseDelete200 "Success"
 // @Failure 400 {object} userSchema.APIResponse400 "Bad Request"
 // @Failure 404 {object} userSchema.APIResponse404 "Not Found"
+// @Failure 401 {object} userSchema.APIResponse401 "Unauthorized"
 // @Router /users/{id} [delete]
 func (h *userHandler) DeleteUserHandler(c *gin.Context) {
+	authorizer, _ := auths.Authorize(c)
+	if !authorizer {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"message": "Unauthorized",
+			"code":    401,
+		})
+		return
+	}
 	id := c.Param("id")
 	ID, _ := strconv.Atoi(id)
 
@@ -173,8 +212,17 @@ func (h *userHandler) DeleteUserHandler(c *gin.Context) {
 // @Success 200 {object} userSchema.APIResponseUser "Success"
 // @Failure 400 {object} userSchema.APIResponse400 "Bad Request"
 // @Failure 404 {object} userSchema.APIResponse404 "Not Found"
+// @Failure 401 {object} userSchema.APIResponse401 "Unauthorized"
 // @Router /users/{id} [put]
 func (h *userHandler) UpdateUserByIdHandler(c *gin.Context) {
+	authorizer, _ := auths.Authorize(c)
+	if !authorizer {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"message": "Unauthorized",
+			"code":    401,
+		})
+		return
+	}
 	var userRequest userSchema.UserRequest
 
 	id := c.Param("id")

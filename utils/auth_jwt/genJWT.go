@@ -6,7 +6,7 @@ import (
 
 	"pustaka-api/utils"
 
-	"github.com/dgrijalva/jwt-go"
+	"github.com/golang-jwt/jwt/v4"
 )
 
 func GenerateJWT(email string) (string, error) {

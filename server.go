@@ -1,11 +1,11 @@
 package main
 
 import (
+	"pustaka-api/config/database"
 	docs "pustaka-api/docs"
 	"pustaka-api/handlers"
 	"pustaka-api/repository"
 	"pustaka-api/services"
-	"pustaka-api/utils"
 
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
@@ -16,10 +16,10 @@ func main() {
 	r := gin.New()
 
 	// Database Connection
-	db := utils.DatabaseConn()
+	db := database.DatabaseConn()
 
 	// Migration
-	// utils.DatabaseMigration(db)
+	// database.DatabaseMigration(db)
 
 	rGlobal := repository.NewRepository(db)
 

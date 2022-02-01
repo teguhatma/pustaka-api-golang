@@ -16,6 +16,7 @@ type User struct {
 	Name      string
 	Email     string `gorm:"uniqueIndex"`
 	Password  string
+	Token     string
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
@@ -27,6 +28,7 @@ type UserRepository interface {
 	DeleteUser(ID int) (User, error)
 	UpdateUser(user User, ID int) (User, error)
 	FindUserByEmail(Email string) (User, error)
+	SaveUserToken(Token, Email string) error
 }
 
 func (r *DBRepository) FindUserById(ID int) (schemas.User, error) {
@@ -72,4 +74,12 @@ func (r *DBRepository) FindUserByEmail(Email string) (User, error) {
 	err := r.db.Where("email=?", Email).First(&user).Error
 
 	return user, err
+}
+
+func (r *DBRepository) SaveUserToken(Token, Email string) error {
+	var user User
+
+	err := r.db.Where("email=?", Email).First(&user).Update("token", Token).Error
+
+	return err
 }

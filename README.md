@@ -20,11 +20,11 @@
 4. Dont showing password in APIResponse ✅
 5. Password hashing to store in DB ✅
 6. Authentication (Bearer) (doing)
-   - Login
-   - GenToken
-   - DecodeToken
-   - restrictedRoute
-7. Relation each other (one-to-many) -> user has many books (doing)
+   - Login ✅
+   - GenToken ✅
+   - DecodeToken ✅
+   - restrictedRoute ✅
+7. Relation each other (one-to-many) -> user has many books ✅
 8. Make Code better (dry, etc)
 9. Update book with image store in AWS S3
 

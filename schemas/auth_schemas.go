@@ -11,7 +11,7 @@ type Token struct {
 }
 
 type APIResponseToken struct {
-	Code 	int		`example:"200"`
-	Message string	`example:"success"`
-	Token	string
+	Code    int    `example:"200"`
+	Message string `example:"success"`
+	Token   string
 }

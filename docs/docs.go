@@ -95,6 +95,12 @@ var doc = `{
                             "$ref": "#/definitions/schemas.APIResponse400"
                         }
                     },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/schemas.APIResponse401"
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "schema": {
@@ -139,6 +145,12 @@ var doc = `{
                             "$ref": "#/definitions/schemas.APIResponse400"
                         }
                     },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/schemas.APIResponse401"
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "schema": {
@@ -181,6 +193,12 @@ var doc = `{
                         "description": "Bad Request",
                         "schema": {
                             "$ref": "#/definitions/schemas.APIResponse400"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/schemas.APIResponse401"
                         }
                     },
                     "404": {
@@ -234,6 +252,12 @@ var doc = `{
                             "$ref": "#/definitions/schemas.APIResponse400"
                         }
                     },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/schemas.APIResponse401"
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "schema": {
@@ -276,6 +300,12 @@ var doc = `{
                             "$ref": "#/definitions/schemas.APIResponse400"
                         }
                     },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/schemas.APIResponse401"
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "schema": {
@@ -309,6 +339,12 @@ var doc = `{
                         "description": "Bad Request",
                         "schema": {
                             "$ref": "#/definitions/schemas.APIResponse400"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/schemas.APIResponse401"
                         }
                     },
                     "404": {
@@ -355,6 +391,12 @@ var doc = `{
                             "$ref": "#/definitions/schemas.APIResponse400"
                         }
                     },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/schemas.APIResponse401"
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "schema": {
@@ -397,6 +439,12 @@ var doc = `{
                         "description": "Bad Request",
                         "schema": {
                             "$ref": "#/definitions/schemas.APIResponse400"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/schemas.APIResponse401"
                         }
                     },
                     "404": {
@@ -450,6 +498,12 @@ var doc = `{
                             "$ref": "#/definitions/schemas.APIResponse400"
                         }
                     },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/schemas.APIResponse401"
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "schema": {
@@ -492,6 +546,12 @@ var doc = `{
                             "$ref": "#/definitions/schemas.APIResponse400"
                         }
                     },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/schemas.APIResponse401"
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "schema": {
@@ -529,6 +589,19 @@ var doc = `{
                 "message": {
                     "type": "string",
                     "example": "bad request"
+                }
+            }
+        },
+        "schemas.APIResponse401": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "example": 401
+                },
+                "message": {
+                    "type": "string",
+                    "example": "unauthorized"
                 }
             }
         },
